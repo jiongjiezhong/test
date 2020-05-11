@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+	<!-- 定义日志文件路径变量 -->
+	<substitutionProperty name="log.base" value="E:\\logs" />
+
+	<!-- stdout appender定义 -->
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%date [%thread] %-5level %logger{80} - %msg%n</pattern>
+		</layout>
+	</appender>   
+
+	<!-- 日志文件  appender定义 -->
+	<appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--  <Encoding>UTF-8</Encoding>-->
+		<File>${log.base}.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${log.base}.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<maxHistory>32</maxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%date [%thread] %-5level %logger{80} - %msg%n</pattern>
+		</layout>
+	</appender>
+
+	<appender name="IMPORT_ETC_DATA"
+			  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_IMPORT_ETC_DATA}/import.log</file>
+		<!-- 按天来回滚，如果需要按小时来回滚，则设置为{yyyy-MM-dd_HH} -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_IMPORT_ETC_DATA}/import.%d{yyyy-MM-dd}.log.%i
+			</fileNamePattern>
+			<!-- 最大保存时间为2个月，2个月之前的都将被清理掉 -->
+			<maxHistory>32</maxHistory>
+			<!-- 按时间回滚的同时，按文件大小来回滚 -->
+			<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<!-- 日志输出格式 -->
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}[%X{ip}] [%thread] %-5level %logger{36} -%msg%n</Pattern>
+		</layout>
+	</appender>
+
+	<logger name="LOG_IMPORT_ETC_DATA" level="INFO" additivity="false">
+		<level value="info" />
+		<appender-ref ref="IMPORT_ETC_DATA" />
+	</logger>
+
+	<!-- 整体默认为WARN级别  -->	
+	<root>
+		<level value="WARN" />
+		<appender-ref ref="stdout" />
+		<appender-ref ref="logfile" />
+	</root>
+	
+	<!-- 业务信息默认为INFO级别  -->
+	<logger name="com.act">
+		<level value="INFO" />
+	</logger>
+
+	<!-- 设为TRACE可显示hibernate sql中的参数 -->
+	<logger name="org.hibernate.type">
+		<level value="INFO" />
+	</logger>
+
+	<!-- 屏蔽hibenate cache中的warnning信息 -->
+	<logger name="org.hibernate.cache">
+		<level value="ERROR" />
+	</logger>	
+</configuration>
+
