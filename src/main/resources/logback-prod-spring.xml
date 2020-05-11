@@ -30,31 +30,31 @@
 		</layout>
 	</appender>
 
-	<appender name="IMPORT_ETC_DATA"
-			  class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_IMPORT_ETC_DATA}/import.log</file>
-		<!-- 按天来回滚，如果需要按小时来回滚，则设置为{yyyy-MM-dd_HH} -->
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_IMPORT_ETC_DATA}/import.%d{yyyy-MM-dd}.log.%i
-			</fileNamePattern>
-			<!-- 最大保存时间为2个月，2个月之前的都将被清理掉 -->
-			<maxHistory>32</maxHistory>
-			<!-- 按时间回滚的同时，按文件大小来回滚 -->
-			<timeBasedFileNamingAndTriggeringPolicy
-					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-				<maxFileSize>100MB</maxFileSize>
-			</timeBasedFileNamingAndTriggeringPolicy>
-		</rollingPolicy>
-		<!-- 日志输出格式 -->
-		<layout class="ch.qos.logback.classic.PatternLayout">
-			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}[%X{ip}] [%thread] %-5level %logger{36} -%msg%n</Pattern>
-		</layout>
-	</appender>
+<!--	<appender name="IMPORT_ETC_DATA"-->
+<!--			  class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--		<file>${LOG_IMPORT_ETC_DATA}/import.log</file>-->
+<!--		&lt;!&ndash; 按天来回滚，如果需要按小时来回滚，则设置为{yyyy-MM-dd_HH} &ndash;&gt;-->
+<!--		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--			<fileNamePattern>${LOG_IMPORT_ETC_DATA}/import.%d{yyyy-MM-dd}.log.%i-->
+<!--			</fileNamePattern>-->
+<!--			&lt;!&ndash; 最大保存时间为2个月，2个月之前的都将被清理掉 &ndash;&gt;-->
+<!--			<maxHistory>32</maxHistory>-->
+<!--			&lt;!&ndash; 按时间回滚的同时，按文件大小来回滚 &ndash;&gt;-->
+<!--			<timeBasedFileNamingAndTriggeringPolicy-->
+<!--					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
+<!--				<maxFileSize>100MB</maxFileSize>-->
+<!--			</timeBasedFileNamingAndTriggeringPolicy>-->
+<!--		</rollingPolicy>-->
+<!--		&lt;!&ndash; 日志输出格式 &ndash;&gt;-->
+<!--		<layout class="ch.qos.logback.classic.PatternLayout">-->
+<!--			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}[%X{ip}] [%thread] %-5level %logger{36} -%msg%n</Pattern>-->
+<!--		</layout>-->
+<!--	</appender>-->
 
-    <logger name="LOG_IMPORT_ETC_DATA" level="INFO" additivity="false">
-        <level value="info" />
-        <appender-ref ref="IMPORT_ETC_DATA" />
-    </logger>
+<!--    <logger name="LOG_IMPORT_ETC_DATA" level="INFO" additivity="false">-->
+<!--        <level value="info" />-->
+<!--        <appender-ref ref="IMPORT_ETC_DATA" />-->
+<!--    </logger>-->
 
 	<!-- 整体默认为WARN级别  -->	
 	<root>
