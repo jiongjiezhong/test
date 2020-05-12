@@ -24,7 +24,7 @@ public class TestTask {
         long start = System.currentTimeMillis();
         try {
             String key = String.valueOf(start);
-            redis.put(key,key,2000L);
+            redis.put(key,key,2L);
             logger.info("redis,key[{}],value[{}]" , redis.getString(key),redis.getString(key));
         } catch (Exception e) {
             logger.error("每10秒钟执行一次redis——put", e);
