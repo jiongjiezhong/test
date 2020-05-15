@@ -23,6 +23,7 @@ public class TestTask {
     public void reSavePayInfo() {
         long start = System.currentTimeMillis();
         try {
+
             String key = String.valueOf(start);
             redis.put(key,key,2L);
             logger.info("redis,key[{}],value[{}]" , redis.getString(key),redis.getString(key));
